@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive SVG with Max Size</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #4B6CDF; /* Fallback for browsers that do not support gradients */
+      transition: background-color 10s; /* Smooth transition for background color */
+    }
+
+    .svg-container {
+      position: relative;
+      width: 80%; /* Full width */
+      max-width: 768px; /* Max width for the SVG */
+      max-height: 100%;
+      box-shadow: 0 0 50px 30px #E9B2F6; /* Adjust the color and size as needed */
+      transition: box-shadow 10s; /* Smooth transition for box shadow */
+    }
+
+    svg {
+      display: block; /* Remove default inline behavior */
+      width: 100%; /* Full width */
+      height: auto; /* Scale in height automatically */
+    }
+    
+    svg rect {
+      transition: fill 5s; /* Smooth transition for SVG rectangle fill */
+    }
+  </style>
+</head>
+<body>
+  <div class="svg-container">
+    <svg viewBox="0 0 1326 768" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+      <!-- Definitions for gradients and filters -->
+      <defs>
+        
+        <!-- Filter for the glow effect -->
+         <filter id="glow-effect" x="-100%" y="-100%" width="300%" height="300%">
+          <feGaussianBlur stdDeviation="80" />
+          <feComponentTransfer result="coloredBlur">
+            <feFuncA type="linear" slope="1.7" intercept="0" />
+          </feComponentTransfer>          
+          <feMerge>
+            <feMergeNode in="coloredBlur"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+      </defs>
+
+      <!-- The background rectangle is omitted since the body has the gradient background -->
+
+      <!-- Create the centered and responsive width rectangle -->
+      <rect x="50%" y="50%" width="800" height="400" rx="100" fill="#E9B2F6" filter="url(#glow-effect)"
+            transform="translate(-400, -200)" />
+    </svg>
+  </div>
+</body>
+</html>
